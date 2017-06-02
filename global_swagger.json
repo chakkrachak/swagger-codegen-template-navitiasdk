@@ -1,0 +1,1563 @@
+{
+    "basePath": "/v1",
+    "definitions": {
+        "AddressResponse": {
+            "properties": {
+                "administrative_regions": {
+                    "items": {
+                        "$ref": "#/definitions/AdminResponse"
+                    },
+                    "type": "array"
+                },
+                "coord": {
+                    "$ref": "#/definitions/CoordResponse"
+                },
+                "house_number": {
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "house_number"
+            ],
+            "type": "object"
+        },
+        "AdminResponse": {
+            "properties": {
+                "coord": {
+                    "$ref": "#/definitions/CoordResponse"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "insee": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "zip_code": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "zip_code"
+            ],
+            "type": "object"
+        },
+        "ChannelResponse": {
+            "properties": {
+                "content_type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "types": {
+                    "enum": [
+                        "web",
+                        "sms",
+                        "email",
+                        "mobile",
+                        "notification",
+                        "twitter",
+                        "facebook",
+                        "unknown_type"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "content_type"
+            ],
+            "type": "object"
+        },
+        "CodeResponse": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CommentResponse": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CommercialModeResponse": {
+            "properties": {
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CoordResponse": {
+            "properties": {
+                "lat": {
+                    "type": "string"
+                },
+                "lon": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CoverageErrorResponse": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CoverageResponse": {
+            "properties": {
+                "dataset_created_at": {
+                    "description": "Creation date of the dataset",
+                    "type": "string"
+                },
+                "end_production_date": {
+                    "description": "End of the production period. We only have data on this production period",
+                    "type": "string"
+                },
+                "error": {
+                    "$ref": "#/definitions/CoverageErrorResponse"
+                },
+                "id": {
+                    "description": "Identifier of the coverage",
+                    "type": "string"
+                },
+                "last_load_at": {
+                    "description": "Datetime of the last data loading",
+                    "pattern": "\\d{4}\\d{2}\\d{2}T\\d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the coverage",
+                    "type": "string"
+                },
+                "shape": {
+                    "description": "GeoJSON of the shape of the coverage",
+                    "type": "string"
+                },
+                "start_production_date": {
+                    "description": "Beginning of the production period. We only have data on this production period",
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DisruptionResponse": {
+            "properties": {
+                "application_periods": {
+                    "items": {
+                        "$ref": "#/definitions/PeriodResponse"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "cause": {
+                    "type": "string"
+                },
+                "contributor": {
+                    "type": "string"
+                },
+                "disruption_id": {
+                    "type": "string"
+                },
+                "disruption_uri": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impact_id": {
+                    "type": "string"
+                },
+                "impacted_objects": {
+                    "items": {
+                        "$ref": "#/definitions/ImpactedResponse"
+                    },
+                    "type": "array"
+                },
+                "messages": {
+                    "items": {
+                        "$ref": "#/definitions/MessageResponse"
+                    },
+                    "type": "array"
+                },
+                "severity": {
+                    "$ref": "#/definitions/SeverityResponse"
+                },
+                "status": {
+                    "enum": [
+                        "past",
+                        "active",
+                        "future"
+                    ],
+                    "type": "string"
+                },
+                "tags": {
+                    "items": {
+                        "$ref": "#/definitions/Response"
+                    },
+                    "type": "array"
+                },
+                "updated_at": {
+                    "pattern": "\\d{4}\\d{2}\\d{2}T\\d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "uri": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contributor",
+                "cause"
+            ],
+            "type": "object"
+        },
+        "ErrorResponse": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "FeedPublisherResponse": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "license": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ImpactedResponse": {
+            "properties": {
+                "impacted_section": {
+                    "$ref": "#/definitions/ImpactedSectionResponse"
+                },
+                "impacted_stops": {
+                    "items": {
+                        "$ref": "#/definitions/ImpactedStopResponse"
+                    },
+                    "type": "array"
+                },
+                "pt_object": {
+                    "$ref": "#/definitions/PtObjectResponse"
+                }
+            },
+            "type": "object"
+        },
+        "ImpactedSectionResponse": {
+            "properties": {
+                "from": {
+                    "$ref": "#/definitions/PtObjectResponse"
+                },
+                "to": {
+                    "$ref": "#/definitions/PtObjectResponse"
+                }
+            },
+            "type": "object"
+        },
+        "ImpactedStopResponse": {
+            "properties": {
+                "amended_arrival_time": {
+                    "pattern": "d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "amended_departure_time": {
+                    "pattern": "d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "arrival_status": {
+                    "type": "string"
+                },
+                "base_arrival_time": {
+                    "pattern": "d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "base_departure_time": {
+                    "pattern": "d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "cause": {
+                    "type": "string"
+                },
+                "departure_status": {
+                    "type": "string"
+                },
+                "stop_point": {
+                    "$ref": "#/definitions/StopPointResponse"
+                },
+                "stop_time_effect": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "cause"
+            ],
+            "type": "object"
+        },
+        "LineGroupResponse": {
+            "properties": {
+                "comments": {
+                    "items": {
+                        "$ref": "#/definitions/CommentResponse"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "lines": {
+                    "items": {
+                        "$ref": "#/definitions/LineResponse"
+                    },
+                    "type": "array"
+                },
+                "main_line": {
+                    "$ref": "#/definitions/LineResponse"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "comments"
+            ],
+            "type": "object"
+        },
+        "LineResponse": {
+            "properties": {
+                "closing_time": {
+                    "pattern": "d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "codes": {
+                    "items": {
+                        "$ref": "#/definitions/CodeResponse"
+                    },
+                    "type": "array"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "comments": {
+                    "items": {
+                        "$ref": "#/definitions/CommentResponse"
+                    },
+                    "type": "array"
+                },
+                "commercial_mode": {
+                    "$ref": "#/definitions/CommercialModeResponse"
+                },
+                "geojson": {
+                    "$ref": "#/definitions/MultiLineStringSchema"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "line_groups": {
+                    "items": {
+                        "$ref": "#/definitions/LineGroupResponse"
+                    },
+                    "type": "array"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/LinkSchema"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "network": {
+                    "$ref": "#/definitions/NetworkResponse"
+                },
+                "opening_time": {
+                    "pattern": "d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "physical_modes": {
+                    "items": {
+                        "$ref": "#/definitions/PhysicalModeResponse"
+                    },
+                    "type": "array"
+                },
+                "properties": {
+                    "items": {
+                        "$ref": "#/definitions/PropertyResponse"
+                    },
+                    "type": "array"
+                },
+                "routes": {
+                    "items": {
+                        "$ref": "#/definitions/RouteResponse"
+                    },
+                    "type": "array"
+                },
+                "text_color": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "links"
+            ],
+            "type": "object"
+        },
+        "LinkSchema": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "internal": {
+                    "type": "boolean"
+                },
+                "rel": {
+                    "type": "string"
+                },
+                "templated": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MessageResponse": {
+            "properties": {
+                "channel": {
+                    "$ref": "#/definitions/ChannelResponse"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MultiLineStringSchema": {
+            "properties": {
+                "coordinates": {
+                    "items": {
+                        "$ref": "#/definitions/Point2D"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "coordinates"
+            ],
+            "type": "object"
+        },
+        "NetworkResponse": {
+            "properties": {
+                "codes": {
+                    "items": {
+                        "$ref": "#/definitions/CodeResponse"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "lines": {
+                    "$ref": "#/definitions/LineResponse"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/LinkSchema"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "links"
+            ],
+            "type": "object"
+        },
+        "PeriodResponse": {
+            "properties": {
+                "begin": {
+                    "pattern": "\\d{4}\\d{2}\\d{2}T\\d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                },
+                "end": {
+                    "pattern": "\\d{4}\\d{2}\\d{2}T\\d{2}\\d{2}\\d{2}",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PhysicalModeResponse": {
+            "properties": {
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PlaceResponse": {
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/AddressResponse"
+                },
+                "administrative_region": {
+                    "$ref": "#/definitions/AdminResponse"
+                },
+                "embedded_type": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "poi": {
+                    "$ref": "#/definitions/PoiResponse"
+                },
+                "quality": {
+                    "type": "integer"
+                },
+                "stop_area": {
+                    "$ref": "#/definitions/StopAreaResponse"
+                },
+                "stop_point": {
+                    "$ref": "#/definitions/StopPointResponse"
+                }
+            },
+            "required": [
+                "quality"
+            ],
+            "type": "object"
+        },
+        "PoiResponse": {
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/AddressResponse"
+                },
+                "administrative_regions": {
+                    "items": {
+                        "$ref": "#/definitions/AdminResponse"
+                    },
+                    "type": "array"
+                },
+                "coord": {
+                    "$ref": "#/definitions/CoordResponse"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "poi_type": {
+                    "$ref": "#/definitions/PoiTypeResponse"
+                },
+                "properties": {
+                    "type": "string"
+                },
+                "stands": {
+                    "$ref": "#/definitions/StandsResponse"
+                }
+            },
+            "type": "object"
+        },
+        "PoiTypeResponse": {
+            "properties": {
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Point2D": {
+            "properties": {},
+            "type": "object"
+        },
+        "PropertyResponse": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PtObjectResponse": {
+            "properties": {
+                "commercial_mode": {
+                    "$ref": "#/definitions/CommercialModeResponse"
+                },
+                "embedded_type": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "line": {
+                    "$ref": "#/definitions/LineResponse"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "network": {
+                    "$ref": "#/definitions/NetworkResponse"
+                },
+                "quality": {
+                    "type": "integer"
+                },
+                "route": {
+                    "$ref": "#/definitions/RouteResponse"
+                },
+                "stop_area": {
+                    "$ref": "#/definitions/StopAreaResponse"
+                },
+                "trip": {
+                    "$ref": "#/definitions/TripResponse"
+                }
+            },
+            "type": "object"
+        },
+        "Response": {
+            "properties": {},
+            "type": "object"
+        },
+        "RouteResponse": {
+            "properties": {
+                "codes": {
+                    "items": {
+                        "$ref": "#/definitions/CodeResponse"
+                    },
+                    "type": "array"
+                },
+                "comments": {
+                    "items": {
+                        "$ref": "#/definitions/CommentResponse"
+                    },
+                    "type": "array"
+                },
+                "direction": {
+                    "$ref": "#/definitions/PlaceResponse"
+                },
+                "direction_type": {
+                    "type": "string"
+                },
+                "geojson": {
+                    "$ref": "#/definitions/MultiLineStringSchema"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "is_frequence": {
+                    "type": "string"
+                },
+                "line": {
+                    "$ref": "#/definitions/LineResponse"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/LinkSchema"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "physical_modes": {
+                    "items": {
+                        "$ref": "#/definitions/PhysicalModeResponse"
+                    },
+                    "type": "array"
+                },
+                "stop_points": {
+                    "items": {
+                        "$ref": "#/definitions/StopPointResponse"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "links",
+                "direction_type"
+            ],
+            "type": "object"
+        },
+        "SeverityResponse": {
+            "properties": {
+                "color": {
+                    "type": "string"
+                },
+                "effect": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "priority": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StandsResponse": {
+            "properties": {
+                "available_bikes": {
+                    "type": "integer"
+                },
+                "available_places": {
+                    "type": "integer"
+                },
+                "total_stands": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "StopAreaResponse": {
+            "properties": {
+                "administrative_regions": {
+                    "description": "Administrative regions of the stop area in which is the stop area",
+                    "items": {
+                        "$ref": "#/definitions/AdminResponse"
+                    },
+                    "type": "array"
+                },
+                "codes": {
+                    "items": {
+                        "$ref": "#/definitions/CodeResponse"
+                    },
+                    "type": "array"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "comments": {
+                    "items": {
+                        "$ref": "#/definitions/CommentResponse"
+                    },
+                    "type": "array"
+                },
+                "commercial_modes": {
+                    "items": {
+                        "$ref": "#/definitions/CommercialModeResponse"
+                    },
+                    "type": "array"
+                },
+                "coord": {
+                    "$ref": "#/definitions/CoordResponse"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "\nLabel of the stop area. The name is directly taken from the data whereas the label is\n something we compute for better traveler information. If you don't know what to display, display the label.\n",
+                    "type": "string"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/LinkSchema"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "physical_modes": {
+                    "items": {
+                        "$ref": "#/definitions/PhysicalModeResponse"
+                    },
+                    "type": "array"
+                },
+                "stop_points": {
+                    "description": "Stop points contained in this stop area",
+                    "items": {
+                        "$ref": "#/definitions/StopPointResponse"
+                    },
+                    "type": "array"
+                },
+                "timezone": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "links"
+            ],
+            "type": "object"
+        },
+        "StopPointResponse": {
+            "properties": {
+                "address": {
+                    "$ref": "#/definitions/AddressResponse"
+                },
+                "administrative_regions": {
+                    "items": {
+                        "$ref": "#/definitions/AdminResponse"
+                    },
+                    "type": "array"
+                },
+                "codes": {
+                    "items": {
+                        "$ref": "#/definitions/CodeResponse"
+                    },
+                    "type": "array"
+                },
+                "comment": {
+                    "type": "string"
+                },
+                "comments": {
+                    "items": {
+                        "$ref": "#/definitions/CommentResponse"
+                    },
+                    "type": "array"
+                },
+                "commercial_modes": {
+                    "items": {
+                        "$ref": "#/definitions/CommercialModeResponse"
+                    },
+                    "type": "array"
+                },
+                "coord": {
+                    "$ref": "#/definitions/CoordResponse"
+                },
+                "equipments": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "links": {
+                    "items": {
+                        "$ref": "#/definitions/LinkSchema"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "physical_modes": {
+                    "items": {
+                        "$ref": "#/definitions/PhysicalModeResponse"
+                    },
+                    "type": "array"
+                },
+                "stop_area": {
+                    "$ref": "#/definitions/StopAreaResponse"
+                }
+            },
+            "required": [
+                "links",
+                "equipments"
+            ],
+            "type": "object"
+        },
+        "TripResponse": {
+            "properties": {
+                "id": {
+                    "description": "Identifier of the object",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Name of the object",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "host": "api.navitia.io",
+    "info": {
+        "contact": {
+            "email": "navitia@googlegroups.com",
+            "name": "Navitia",
+            "url": "https://www.navitia.io/"
+        },
+        "description": "\n    navitia.io is the open API for building cool stuff with mobility data. It provides the following services\n\n    * journeys computation\n    * line schedules\n    * next departures\n    * exploration of public transport data / search places\n    * and sexy things such as isochrones\n\n    navitia is a HATEOAS API that returns JSON formated results\n    ",
+        "license": {
+            "name": "license",
+            "url": "https://www.navitia.io/api-term-of-use"
+        },
+        "title": "navitia",
+        "version": "v2.33.0-65-g65443e2"
+    },
+    "paths": {
+        "/coverage/": {
+            "get": {
+                "consumes": [
+                    ""
+                ],
+                "operationId": "get_coverage_",
+                "parameters": [
+                    {
+                        "default": "False",
+                        "description": "hide the coverage geojson to reduce response size",
+                        "in": "query",
+                        "name": "disable_geojson",
+                        "type": "boolean"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "regions": {
+                                    "items": {
+                                        "$ref": "#/definitions/CoverageResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "regions"
+                            ],
+                            "title": "CoveragesResponse",
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Coverage"
+                ]
+            }
+        },
+        "/coverage/{lon};{lat}/": {
+            "get": {
+                "consumes": [
+                    ""
+                ],
+                "operationId": "get_coverage__lon__lat__",
+                "parameters": [
+                    {
+                        "default": "False",
+                        "description": "hide the coverage geojson to reduce response size",
+                        "in": "query",
+                        "name": "disable_geojson",
+                        "type": "boolean"
+                    },
+                    {
+                        "description": " The latitude of where the coord you want to query",
+                        "in": "path",
+                        "name": "lat",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "description": " The longitude of where the coord you want to query",
+                        "in": "path",
+                        "name": "lon",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "regions": {
+                                    "items": {
+                                        "$ref": "#/definitions/CoverageResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "regions"
+                            ],
+                            "title": "CoveragesResponse",
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Coverage"
+                ]
+            }
+        },
+        "/coverage/{lon};{lat}/places": {
+            "get": {
+                "consumes": [
+                    ""
+                ],
+                "operationId": "get_coverage__lon__lat__places",
+                "parameters": [
+                    {
+                        "description": "The data to search",
+                        "in": "query",
+                        "name": "q",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": "[u'stop_area', u'address', u'poi', u'administrative_region']",
+                        "description": "The type of data to search",
+                        "enum": [
+                            "stop_point",
+                            "administrative_region",
+                            "stop_area",
+                            "address",
+                            "poi",
+                            "line"
+                        ],
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "type[]",
+                        "type": "array"
+                    },
+                    {
+                        "default": "10",
+                        "description": "The maximum number of places returned",
+                        "in": "query",
+                        "name": "count",
+                        "type": "integer"
+                    },
+                    {
+                        "default": "0",
+                        "description": "Type of search: firstletter or type error",
+                        "in": "query",
+                        "name": "search_type",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "If filled, will restrain the search within the given admin uris",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "admin_uri[]",
+                        "type": "array"
+                    },
+                    {
+                        "default": "1",
+                        "description": "The depth of objects",
+                        "in": "query",
+                        "name": "depth",
+                        "type": "integer"
+                    },
+                    {
+                        "default": "False",
+                        "description": "remove geojson from the response",
+                        "in": "query",
+                        "name": "disable_geojson",
+                        "type": "boolean"
+                    },
+                    {
+                        "description": "Coordinates longitude;latitude used to prioritize the objects around this coordinate",
+                        "in": "query",
+                        "name": "from",
+                        "type": "string"
+                    },
+                    {
+                        "description": "Geographical shape to limit the search.",
+                        "in": "query",
+                        "name": "shape",
+                        "type": "string"
+                    },
+                    {
+                        "description": " The latitude of where the coord you want to query",
+                        "in": "path",
+                        "name": "lat",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "description": " The longitude of where the coord you want to query",
+                        "in": "path",
+                        "name": "lon",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "disruptions": {
+                                    "items": {
+                                        "$ref": "#/definitions/DisruptionResponse"
+                                    },
+                                    "type": "array"
+                                },
+                                "error": {
+                                    "$ref": "#/definitions/ErrorResponse"
+                                },
+                                "feed_publishers": {
+                                    "items": {
+                                        "$ref": "#/definitions/FeedPublisherResponse"
+                                    },
+                                    "type": "array"
+                                },
+                                "places": {
+                                    "items": {
+                                        "$ref": "#/definitions/PlaceResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "disruptions",
+                                "feed_publishers"
+                            ],
+                            "title": "PlacesResponse",
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Places"
+                ]
+            }
+        },
+        "/coverage/{region}/": {
+            "get": {
+                "consumes": [
+                    ""
+                ],
+                "operationId": "get_coverage__region__",
+                "parameters": [
+                    {
+                        "default": "False",
+                        "description": "hide the coverage geojson to reduce response size",
+                        "in": "query",
+                        "name": "disable_geojson",
+                        "type": "boolean"
+                    },
+                    {
+                        "description": " The region you want to query",
+                        "in": "path",
+                        "name": "region",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "regions": {
+                                    "items": {
+                                        "$ref": "#/definitions/CoverageResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "regions"
+                            ],
+                            "title": "CoveragesResponse",
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Coverage"
+                ]
+            }
+        },
+        "/coverage/{region}/places": {
+            "get": {
+                "consumes": [
+                    ""
+                ],
+                "operationId": "get_coverage__region__places",
+                "parameters": [
+                    {
+                        "description": "The data to search",
+                        "in": "query",
+                        "name": "q",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": "[u'stop_area', u'address', u'poi', u'administrative_region']",
+                        "description": "The type of data to search",
+                        "enum": [
+                            "stop_point",
+                            "administrative_region",
+                            "stop_area",
+                            "address",
+                            "poi",
+                            "line"
+                        ],
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "type[]",
+                        "type": "array"
+                    },
+                    {
+                        "default": "10",
+                        "description": "The maximum number of places returned",
+                        "in": "query",
+                        "name": "count",
+                        "type": "integer"
+                    },
+                    {
+                        "default": "0",
+                        "description": "Type of search: firstletter or type error",
+                        "in": "query",
+                        "name": "search_type",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "If filled, will restrain the search within the given admin uris",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "admin_uri[]",
+                        "type": "array"
+                    },
+                    {
+                        "default": "1",
+                        "description": "The depth of objects",
+                        "in": "query",
+                        "name": "depth",
+                        "type": "integer"
+                    },
+                    {
+                        "default": "False",
+                        "description": "remove geojson from the response",
+                        "in": "query",
+                        "name": "disable_geojson",
+                        "type": "boolean"
+                    },
+                    {
+                        "description": "Coordinates longitude;latitude used to prioritize the objects around this coordinate",
+                        "in": "query",
+                        "name": "from",
+                        "type": "string"
+                    },
+                    {
+                        "description": "Geographical shape to limit the search.",
+                        "in": "query",
+                        "name": "shape",
+                        "type": "string"
+                    },
+                    {
+                        "description": " The region you want to query",
+                        "in": "path",
+                        "name": "region",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "disruptions": {
+                                    "items": {
+                                        "$ref": "#/definitions/DisruptionResponse"
+                                    },
+                                    "type": "array"
+                                },
+                                "error": {
+                                    "$ref": "#/definitions/ErrorResponse"
+                                },
+                                "feed_publishers": {
+                                    "items": {
+                                        "$ref": "#/definitions/FeedPublisherResponse"
+                                    },
+                                    "type": "array"
+                                },
+                                "places": {
+                                    "items": {
+                                        "$ref": "#/definitions/PlaceResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "disruptions",
+                                "feed_publishers"
+                            ],
+                            "title": "PlacesResponse",
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Places"
+                ]
+            }
+        },
+        "/places": {
+            "get": {
+                "consumes": [
+                    ""
+                ],
+                "operationId": "get_places",
+                "parameters": [
+                    {
+                        "description": "The data to search",
+                        "in": "query",
+                        "name": "q",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "default": "[u'stop_area', u'address', u'poi', u'administrative_region']",
+                        "description": "The type of data to search",
+                        "enum": [
+                            "stop_point",
+                            "administrative_region",
+                            "stop_area",
+                            "address",
+                            "poi",
+                            "line"
+                        ],
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "type[]",
+                        "type": "array"
+                    },
+                    {
+                        "default": "10",
+                        "description": "The maximum number of places returned",
+                        "in": "query",
+                        "name": "count",
+                        "type": "integer"
+                    },
+                    {
+                        "default": "0",
+                        "description": "Type of search: firstletter or type error",
+                        "in": "query",
+                        "name": "search_type",
+                        "type": "integer"
+                    },
+                    {
+                        "description": "If filled, will restrain the search within the given admin uris",
+                        "in": "query",
+                        "items": {
+                            "type": "string"
+                        },
+                        "name": "admin_uri[]",
+                        "type": "array"
+                    },
+                    {
+                        "default": "1",
+                        "description": "The depth of objects",
+                        "in": "query",
+                        "name": "depth",
+                        "type": "integer"
+                    },
+                    {
+                        "default": "False",
+                        "description": "remove geojson from the response",
+                        "in": "query",
+                        "name": "disable_geojson",
+                        "type": "boolean"
+                    },
+                    {
+                        "description": "Coordinates longitude;latitude used to prioritize the objects around this coordinate",
+                        "in": "query",
+                        "name": "from",
+                        "type": "string"
+                    },
+                    {
+                        "description": "Geographical shape to limit the search.",
+                        "in": "query",
+                        "name": "shape",
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "properties": {
+                                "disruptions": {
+                                    "items": {
+                                        "$ref": "#/definitions/DisruptionResponse"
+                                    },
+                                    "type": "array"
+                                },
+                                "error": {
+                                    "$ref": "#/definitions/ErrorResponse"
+                                },
+                                "feed_publishers": {
+                                    "items": {
+                                        "$ref": "#/definitions/FeedPublisherResponse"
+                                    },
+                                    "type": "array"
+                                },
+                                "places": {
+                                    "items": {
+                                        "$ref": "#/definitions/PlaceResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "disruptions",
+                                "feed_publishers"
+                            ],
+                            "title": "PlacesResponse",
+                            "type": "object"
+                        }
+                    }
+                },
+                "summary": "",
+                "tags": [
+                    "Places"
+                ]
+            }
+        }
+    },
+    "security": [
+        {
+            "basicAuth": []
+        }
+    ],
+    "securityDefinitions": {
+        "basicAuth": {
+            "type": "basic"
+        }
+    },
+    "swagger": "2.0"
+}
