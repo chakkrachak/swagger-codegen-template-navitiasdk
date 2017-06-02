@@ -35,6 +35,13 @@ public class {{classname}} {
     }
 
     @Autowired
+    public {{classname}}(String token) {
+        ApiClient {{localVariablePrefix}}apiClient = new ApiClient();
+        {{localVariablePrefix}}apiClient.setUsername(token);
+        this.{{localVariablePrefix}}apiClient = {{localVariablePrefix}}apiClient;
+    }
+
+    @Autowired
     public {{classname}}(ApiClient apiClient) {
         this.{{localVariablePrefix}}apiClient = apiClient;
     }
@@ -68,18 +75,18 @@ public class {{classname}} {
         final Map<String, Object> uriVariables = new HashMap<String, Object>();{{#pathParams}}
         uriVariables.put("{{baseName}}", {{{paramName}}});{{/pathParams}}{{/hasPathParams}}
         String {{localVariablePrefix}}path = UriComponentsBuilder.fromPath("{{{path}}}"){{#hasPathParams}}.buildAndExpand(uriVariables){{/hasPathParams}}{{^hasPathParams}}.build(){{/hasPathParams}}.toUriString();
-        
+
         final MultiValueMap<String, String> {{localVariablePrefix}}queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders {{localVariablePrefix}}headerParams = new HttpHeaders();
         final MultiValueMap<String, Object> {{localVariablePrefix}}formParams = new LinkedMultiValueMap<String, Object>();{{#hasQueryParams}}
-        
+
         {{#queryParams}}{{localVariablePrefix}}queryParams.putAll({{localVariablePrefix}}apiClient.parameterToMultiValueMap({{#collectionFormat}}ApiClient.CollectionFormat.valueOf("{{{collectionFormat}}}".toUpperCase()){{/collectionFormat}}{{^collectionFormat}}null{{/collectionFormat}}, "{{baseName}}", {{paramName}}));{{#hasMore}}
         {{/hasMore}}{{/queryParams}}{{/hasQueryParams}}{{#hasHeaderParams}}
-        
+
         {{#headerParams}}if ({{paramName}} != null)
         {{localVariablePrefix}}headerParams.add("{{baseName}}", {{localVariablePrefix}}apiClient.parameterToString({{paramName}}));{{#hasMore}}
         {{/hasMore}}{{/headerParams}}{{/hasHeaderParams}}{{#hasFormParams}}
-        
+
         {{#formParams}}if ({{paramName}} != null)
             {{localVariablePrefix}}formParams.add("{{baseName}}", {{#isFile}}new FileSystemResource({{paramName}}){{/isFile}}{{^isFile}}{{paramName}}{{/isFile}});{{#hasMore}}
         {{/hasMore}}{{/formParams}}{{/hasFormParams}}

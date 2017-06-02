@@ -28,6 +28,12 @@ public class {{classname}} {
     this(Configuration.getDefaultApiClient());
   }
 
+  public {{classname}}(String token) {
+    ApiClient {{localVariablePrefix}}apiClient = new ApiClient();
+    {{localVariablePrefix}}apiClient.setUsername(token);
+    this.{{localVariablePrefix}}apiClient = {{localVariablePrefix}}apiClient;
+  }
+
   public {{classname}}(ApiClient apiClient) {
     this.{{localVariablePrefix}}apiClient = apiClient;
   }

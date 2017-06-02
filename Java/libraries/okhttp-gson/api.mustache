@@ -51,9 +51,9 @@ public class {{classname}} {
     }
 
     public {{classname}}(String token) {
-        ApiClient apiClient = new ApiClient();
-        apiClient.setUsername(token);
-        this.apiClient = apiClient;
+        ApiClient {{localVariablePrefix}}apiClient = new ApiClient();
+        {{localVariablePrefix}}apiClient.setUsername(token);
+        this.{{localVariablePrefix}}apiClient = {{localVariablePrefix}}apiClient;
     }
 
     public {{classname}}(ApiClient apiClient) {
