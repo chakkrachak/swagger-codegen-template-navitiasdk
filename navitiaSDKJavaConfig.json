@@ -1,0 +1,15 @@
+{
+    "lang" : "java",
+    "inputSpec" : "global_swagger.json",
+    "outputDir" : "/Volumes/ramdisk/tmp/java_api_client",
+    "verbose" : false,
+    "templateDir" : "Java",
+    "apiPackage" : "org.kisio.NavitiaSDK.apis",
+    "modelPackage" : "org.kisio.NavitiaSDK.models",
+    "invokerPackage" : "org.kisio.NavitiaSDK.invokers",
+    "groupId" : "org.kisio.sdk",
+    "artifactId" : "navitia-sdk",
+    "artifactVersion" : "0.2.0",
+    "library" : "okhttp-gson",
+    "gitRepoId" : "NavitiaSDK_android"
+}
