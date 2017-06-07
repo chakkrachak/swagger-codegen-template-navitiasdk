@@ -4,14 +4,14 @@ import org.kisio.NavitiaSDK.apis.PlacesApi;
 
 public class NavitiaEndpoints {
     private NavitiaConfiguration navitiaConfiguration;
-    private PlacesApi places;
+    private PlacesApi rawPlacesApi;
 
-    public PlacesApi getPlaces() {
-        return places;
+    public PlacesApi getRawPlacesApi() {
+        return rawPlacesApi;
     }
 
     public NavitiaEndpoints(NavitiaConfiguration navitiaConfiguration) {
         this.navitiaConfiguration = navitiaConfiguration;
-        this.places = new PlacesApi(this.navitiaConfiguration.getToken());
+        this.rawPlacesApi = new PlacesApi(this.navitiaConfiguration.getToken());
     }
 }

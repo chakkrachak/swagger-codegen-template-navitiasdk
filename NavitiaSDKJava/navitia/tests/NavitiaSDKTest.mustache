@@ -3,7 +3,6 @@ package org.kisio.NavitiaSDK;
 import org.junit.Test;
 import org.kisio.NavitiaSDK.models.PlacesResponse;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -17,9 +16,8 @@ public class NavitiaSDKTest {
         assertNotNull(navitiaSDK.getConfiguration());
         assertEquals("takotak", navitiaSDK.getConfiguration().getToken());
         assertNotNull(navitiaSDK.getEndpoints());
-        assertNotNull(navitiaSDK.getEndpoints().getPlaces());
+        assertNotNull(navitiaSDK.getEndpoints().getRawPlacesApi());
         assertNotNull(navitiaSDK.getFeatures());
-        assertNotNull(navitiaSDK.getFeatures().getAutoComplete());
     }
 
     @Test
@@ -35,7 +33,7 @@ public class NavitiaSDKTest {
         Boolean disableGeojson = null;
         String from = null;
         String shape = null;
-        PlacesResponse response = navitiaSDK.getEndpoints().getPlaces().getPlaces(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape);
+        PlacesResponse response = navitiaSDK.getEndpoints().getRawPlacesApi().getPlaces(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape);
 
         assertEquals("Capdenac-Gare", response.getPlaces().get(0).getName());
     }
