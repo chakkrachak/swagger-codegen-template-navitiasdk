@@ -1,17 +1,17 @@
 package org.kisio.NavitiaSDK;
 
-// import org.kisio.NavitiaSDK.Places.EndpointPlaces;
+import org.kisio.NavitiaSDK.apis.PlacesApi;
 
 public class NavitiaEndpoints {
     private NavitiaConfiguration navitiaConfiguration;
-//    private EndpointPlaces places;
+    private PlacesApi places;
 
-//    public EndpointPlaces getPlaces() {
-//        return places;
-//    }
+    public PlacesApi getPlaces() {
+        return places;
+    }
 
     public NavitiaEndpoints(NavitiaConfiguration navitiaConfiguration) {
         this.navitiaConfiguration = navitiaConfiguration;
-//        this.places = new EndpointPlaces(this.navitiaConfiguration);
+        this.places = new PlacesApi(this.navitiaConfiguration.getToken());
     }
 }
