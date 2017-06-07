@@ -1,6 +1,10 @@
 package org.kisio.NavitiaSDK;
 
 import org.junit.Test;
+import org.kisio.NavitiaSDK.models.PlacesResponse;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -16,5 +20,23 @@ public class NavitiaSDKTest {
         assertNotNull(navitiaSDK.getEndpoints().getPlaces());
         assertNotNull(navitiaSDK.getFeatures());
         assertNotNull(navitiaSDK.getFeatures().getAutoComplete());
+    }
+
+    @Test
+    public void shouldRetrieveEndpointPlacesResultsGivenValidConfigurationWithGeneratedRequester() throws Exception {
+        NavitiaSDK navitiaSDK = new NavitiaSDK(new NavitiaConfiguration("9e304161-bb97-4210-b13d-c71eaf58961c"));
+
+        String q = "gare";
+        List<String> type = null;
+        Integer count = 10;
+        Integer searchType = null;
+        List<String> adminUri = null;
+        Integer depth = null;
+        Boolean disableGeojson = null;
+        String from = null;
+        String shape = null;
+        PlacesResponse response = navitiaSDK.getEndpoints().getPlaces().getPlaces(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape);
+
+        assertEquals("Capdenac-Gare", response.getPlaces().get(0).getName());
     }
 }
