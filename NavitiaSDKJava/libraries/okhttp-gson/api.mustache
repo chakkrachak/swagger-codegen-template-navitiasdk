@@ -44,30 +44,37 @@ import java.util.Map;
 
 {{#operations}}
 public class {{classname}} {
-    // BEGIN FLUENT REQUESTER FOR getPlaces SYNC
-    public class getPlacesFluentRequester {
-        private PlacesApi placesApi;
-        private String q;
+    {{#operation}}
+    // BEGIN FLUENT REQUESTER FOR {{operationId}} SYNC
+    public class {{operationId}}FluentRequester {
+        private {{classname}} currentApi;
 
-        public getPlacesFluentRequester(PlacesApi placesApi) {
-            this.placesApi = placesApi;
+        {{#allParams}}
+        private {{{dataType}}} {{paramName}};
+        {{/allParams}}
+
+        public {{operationId}}FluentRequester({{classname}} currentApi) {
+            this.currentApi = currentApi;
         }
 
-        public getPlacesFluentRequester withQ(String q) {
-            this.q = q;
+        {{#allParams}}
+        public {{operationId}}FluentRequester with{{paramName}}({{{dataType}}} {{paramName}}) {
+            this.{{paramName}} = {{paramName}};
             return this;
         }
+        {{/allParams}}
 
-        public PlacesResponse execute() throws ApiException {
-            return placesApi.getPlaces(this.q, null, 10, null, null, null, null, null, null);
+        public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}execute() throws ApiException {
+            return currentApi.{{operationId}}({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
         }
     }
 
-    public getPlacesFluentRequester newGetPlacesFluentRequester() {
-        return new getPlacesFluentRequester(this);
+    public {{operationId}}FluentRequester {{operationId}}NewFluentRequester() {
+        return new {{operationId}}FluentRequester(this);
     }
-    // END FLUENT REQUESTER FOR getPlaces SYNC
+    // END FLUENT REQUESTER FOR {{operationId}} SYNC
 
+    {{/operation}}
     private ApiClient {{localVariablePrefix}}apiClient;
 
     public {{classname}}() {
