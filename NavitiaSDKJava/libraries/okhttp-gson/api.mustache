@@ -44,6 +44,30 @@ import java.util.Map;
 
 {{#operations}}
 public class {{classname}} {
+    // BEGIN FLUENT REQUESTER FOR getPlaces SYNC
+    public class getPlacesFluentRequester {
+        private PlacesApi placesApi;
+        private String q;
+
+        public getPlacesFluentRequester(PlacesApi placesApi) {
+            this.placesApi = placesApi;
+        }
+
+        public getPlacesFluentRequester withQ(String q) {
+            this.q = q;
+            return this;
+        }
+
+        public PlacesResponse execute() throws ApiException {
+            return placesApi.getPlaces(this.q, null, 10, null, null, null, null, null, null);
+        }
+    }
+
+    public getPlacesFluentRequester newGetPlacesFluentRequester() {
+        return new getPlacesFluentRequester(this);
+    }
+    // END FLUENT REQUESTER FOR getPlaces SYNC
+
     private ApiClient {{localVariablePrefix}}apiClient;
 
     public {{classname}}() {

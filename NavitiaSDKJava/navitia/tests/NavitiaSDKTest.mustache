@@ -20,7 +20,7 @@ public class NavitiaSDKTest {
         assertNotNull(navitiaSDK.getConfiguration());
         assertEquals("takotak", navitiaSDK.getConfiguration().getToken());
         assertNotNull(navitiaSDK.getEndpoints());
-        assertNotNull(navitiaSDK.getEndpoints().getRawPlacesApi());
+        assertNotNull(navitiaSDK.getEndpoints().getPlacesApi());
         assertNotNull(navitiaSDK.getFeatures());
     }
 
@@ -37,7 +37,7 @@ public class NavitiaSDKTest {
         Boolean disableGeojson = null;
         String from = null;
         String shape = null;
-        PlacesResponse response = navitiaSDK.getEndpoints().getRawPlacesApi().getPlaces(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape);
+        PlacesResponse response = navitiaSDK.getEndpoints().getPlacesApi().getPlaces(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape);
 
         assertEquals("Capdenac-Gare", response.getPlaces().get(0).getName());
     }
@@ -57,7 +57,7 @@ public class NavitiaSDKTest {
         String shape = null;
 
         final String[] asyncResult = new String[1];
-        Call placesCall = navitiaSDK.getEndpoints().getRawPlacesApi().getPlacesAsync(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape, new ApiCallback<PlacesResponse>() {
+        Call placesCall = navitiaSDK.getEndpoints().getPlacesApi().getPlacesAsync(q, type, count, searchType, adminUri, depth, disableGeojson, from, shape, new ApiCallback<PlacesResponse>() {
             @Override
             public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) { }
 
@@ -80,5 +80,14 @@ public class NavitiaSDKTest {
             asyncResult.wait();
         }
         assertEquals("Capdenac-Gare", asyncResult[0]);
+    }
+
+    @Test
+    public void shouldRetrieveEndpointPlacesResultsGivenValidConfigurationWithGeneratedSyncFluentRequester() throws Exception {
+        NavitiaSDK navitiaSDK = new NavitiaSDK(new NavitiaConfiguration("9e304161-bb97-4210-b13d-c71eaf58961c"));
+
+        PlacesResponse response = navitiaSDK.getEndpoints().getPlacesApi().newGetPlacesFluentRequester().withQ("gare").execute();
+
+        assertEquals("Capdenac-Gare", response.getPlaces().get(0).getName());
     }
 }

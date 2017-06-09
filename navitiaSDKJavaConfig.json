@@ -3,7 +3,7 @@
     "inputSpec" : "global_swagger.json",
     "templateDir" : "NavitiaSDKJava",
     "outputDir" : "/Volumes/ramdisk/tmp/java_api_client",
-    "verbose" : true,
+    "verbose" : false,
     "artifactVersion" : "0.2.0",
     "gitRepoId" : "NavitiaSDK_android"
 }
