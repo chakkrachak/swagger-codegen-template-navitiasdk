@@ -44,37 +44,6 @@ import java.util.Map;
 
 {{#operations}}
 public class {{classname}} {
-    {{#operation}}
-    // BEGIN FLUENT REQUESTER FOR {{operationId}} SYNC
-    public class {{operationId}}FluentRequester {
-        private {{classname}} currentApi;
-
-        {{#allParams}}
-        private {{{dataType}}} {{paramName}};
-        {{/allParams}}
-
-        public {{operationId}}FluentRequester({{classname}} currentApi) {
-            this.currentApi = currentApi;
-        }
-
-        {{#allParams}}
-        public {{operationId}}FluentRequester with{{paramName}}({{{dataType}}} {{paramName}}) {
-            this.{{paramName}} = {{paramName}};
-            return this;
-        }
-        {{/allParams}}
-
-        public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}execute() throws ApiException {
-            return currentApi.{{operationId}}({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
-        }
-    }
-
-    public {{operationId}}FluentRequester {{operationId}}NewFluentRequester() {
-        return new {{operationId}}FluentRequester(this);
-    }
-    // END FLUENT REQUESTER FOR {{operationId}} SYNC
-
-    {{/operation}}
     private ApiClient {{localVariablePrefix}}apiClient;
 
     public {{classname}}() {
@@ -260,6 +229,38 @@ public class {{classname}} {
         {{localVariablePrefix}}apiClient.executeAsync({{localVariablePrefix}}call, {{localVariablePrefix}}localVarReturnType, {{localVariablePrefix}}callback);{{/returnType}}{{^returnType}}{{localVariablePrefix}}apiClient.executeAsync({{localVariablePrefix}}call, {{localVariablePrefix}}callback);{{/returnType}}
         return {{localVariablePrefix}}call;
     }
+    {{/operation}}
+
+    {{#operation}}
+    // BEGIN FLUENT REQUESTER FOR {{operationId}} SYNC
+    public class {{operationId}}FluentRequester {
+        private {{classname}} currentApi;
+
+        {{#allParams}}
+        private {{{dataType}}} {{paramName}};
+        {{/allParams}}
+
+        public {{operationId}}FluentRequester({{classname}} currentApi) {
+            this.currentApi = currentApi;
+        }
+
+        {{#allParams}}
+        public {{operationId}}FluentRequester with{{paramName}}({{{dataType}}} {{paramName}}) {
+            this.{{paramName}} = {{paramName}};
+            return this;
+        }
+        {{/allParams}}
+
+        public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}execute() throws ApiException {
+            return currentApi.{{operationId}}({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+        }
+    }
+
+    public {{operationId}}FluentRequester {{operationId}}NewFluentRequester() {
+        return new {{operationId}}FluentRequester(this);
+    }
+    // END FLUENT REQUESTER FOR {{operationId}} SYNC
+
     {{/operation}}
 }
 {{/operations}}
