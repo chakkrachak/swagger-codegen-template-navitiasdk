@@ -234,25 +234,39 @@ public class {{classname}} {
     {{#operation}}
     // BEGIN FLUENT REQUESTER FOR {{operationId}} SYNC
     public class {{operationId}}FluentRequester {
-        private {{classname}} currentApi;
-
-        {{#allParams}}
-        private {{{dataType}}} {{paramName}};
-        {{/allParams}}
+        private Wither wither;
 
         public {{operationId}}FluentRequester({{classname}} currentApi) {
-            this.currentApi = currentApi;
+            this.wither = new Wither(currentApi, this);
         }
 
-        {{#allParams}}
-        public {{operationId}}FluentRequester with{{paramName}}({{{dataType}}} {{paramName}}) {
-            this.{{paramName}} = {{paramName}};
-            return this;
-        }
-        {{/allParams}}
+        public class Wither {
+            {{#allParams}}
+            private {{{dataType}}} {{paramName}};
+            {{/allParams}}
 
-        public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}execute() throws ApiException {
-            return currentApi.{{operationId}}({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+            {{classname}} currentApi;
+            private {{operationId}}FluentRequester {{operationId}}FluentRequesterInstance;
+
+            public Wither({{classname}} currentApi, {{operationId}}FluentRequester {{operationId}}FluentRequesterInstance) {
+                this.currentApi = currentApi;
+                this.{{operationId}}FluentRequesterInstance = {{operationId}}FluentRequesterInstance;
+            }
+
+            {{#allParams}}
+            public Wither {{paramName}}({{{dataType}}} {{paramName}}) {
+                this.{{paramName}} = {{paramName}};
+                return this;
+            }
+            {{/allParams}}
+
+            public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}execute() throws ApiException {
+                return currentApi.{{operationId}}({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
+            }
+        }
+
+        public Wither with() {
+            return wither;
         }
     }
 
