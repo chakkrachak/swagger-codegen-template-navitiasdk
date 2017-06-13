@@ -1,0 +1,9 @@
+{
+    "lang" : "navitiaSDKSwift3",
+    "inputSpec" : "global_swagger.json",
+    "templateDir" : "NavitiaSDKSwift3",
+    "outputDir" : "/Volumes/ramdisk/tmp/swift3_api_client",
+    "verbose" : false,
+    "artifactVersion" : "0.2.0",
+    "gitRepoId" : "NavitiaSDK_ios"
+}

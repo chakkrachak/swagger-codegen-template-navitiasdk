@@ -263,6 +263,10 @@ public class {{classname}} {
             public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}execute() throws ApiException {
                 return currentApi.{{operationId}}({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}});
             }
+
+            public com.squareup.okhttp.Call executeAsync(final ApiCallback<{{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}> callback) throws ApiException {
+                return currentApi.{{operationId}}Async({{#allParams}}this.{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}, callback);
+            }
         }
 
         public Wither with() {

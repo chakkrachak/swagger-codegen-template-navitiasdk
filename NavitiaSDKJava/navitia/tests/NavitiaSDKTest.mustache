@@ -90,4 +90,34 @@ public class NavitiaSDKTest {
 
         assertEquals("Capdenac-Gare", response.getPlaces().get(0).getName());
     }
+
+    @Test
+    public void shouldRetrieveEndpointPlacesResultsGivenValidConfigurationWithGeneratedAsyncFluentRequester() throws Exception {
+        NavitiaSDK navitiaSDK = new NavitiaSDK(new NavitiaConfiguration("9e304161-bb97-4210-b13d-c71eaf58961c"));
+
+        final String[] asyncResult = new String[1];
+        Call placesCall = navitiaSDK.getEndpoints().getPlacesApi().getPlacesNewFluentRequester().with().q("gare").count(10).executeAsync(new ApiCallback<PlacesResponse>() {
+            @Override
+            public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) { }
+
+            @Override
+            public void onSuccess(PlacesResponse result, int statusCode, Map<String, List<String>> responseHeaders) {
+                asyncResult[0] = result.getPlaces().get(0).getName();
+                synchronized (asyncResult) {
+                    asyncResult.notify();
+                }
+            }
+
+            @Override
+            public void onUploadProgress(long bytesWritten, long contentLength, boolean done) { }
+
+            @Override
+            public void onDownloadProgress(long bytesRead, long contentLength, boolean done) { }
+        });
+
+        synchronized (asyncResult) {
+            asyncResult.wait();
+        }
+        assertEquals("Capdenac-Gare", asyncResult[0]);
+    }
 }
